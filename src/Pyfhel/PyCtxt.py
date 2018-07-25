@@ -33,6 +33,8 @@ import numbers
 import copy
 
 class PyCtxt:
+
+    __slots__ = ["__ids", "__length"]
     
     # INITIALIZATION 
     def __init__(self, pyfhel, length):
@@ -57,6 +59,16 @@ class PyCtxt:
         return self.__pyfhel
     def getLen(self):
         return self.__length
+
+    # -------------------- OVERRIDE PICKLE OPERATORS -------------------- #
+    def __getstate__(self):
+        return self.__ids, self.__length
+
+    def __setstate__(self, state):
+        self.__ids, self.__length = state
+    
+    def sefPyfhel(self, pyfhel):
+        self.__pyfhel = pyfhel
     
 
     # -------------------- OVERRIDE ARITHMETIC OPERATORS -------------------- #
